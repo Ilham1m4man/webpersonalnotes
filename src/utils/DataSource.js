@@ -43,6 +43,10 @@ const getInitialData = () => ([
     },
 ]);
 
+const getArchivedData = () => ([
+
+]);
+
 const showFormattedDate = (date) => {
     const options = {
         weekday: "long",
@@ -53,4 +57,4 @@ const showFormattedDate = (date) => {
     return new Date(date).toLocaleDateString("id-ID", options)
 }
 
-export { getInitialData, showFormattedDate };
+export { getInitialData, getArchivedData, showFormattedDate };
