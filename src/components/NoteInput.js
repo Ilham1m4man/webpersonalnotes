@@ -7,7 +7,8 @@ class NoteInput extends React.Component {
         this.state = {
             title: '',
             createdAt: '',
-            body: ''
+            body: '',
+            charLimit: 50
         }
 
         this.onTitleChangeHandler = this.onTitleChangeHandler.bind(this);
@@ -33,16 +34,19 @@ class NoteInput extends React.Component {
 
     onSubmitHandler(event) {
         event.preventDefault();
-        this.props.addNote(this.state);
+        this.props.addNewNote(this.state);
     }
 
     render() {
         return (
-            <form className='create-note' onSubmit={this.onSubmitHandler}>
-                <input type="text" placeholder="Title" value={this.state.title} onChange={this.onTitleChangeHandler} />
-                <input type="text" placeholder="Description" value={this.state.body} onChange={this.onBodyChangeHandler} />
-                <button type="submit">Create</button>
-            </form>
+            <>
+                <p className="char-counter">Character left: {this.state.charLimit-this.state.title.length}</p>
+                <form className='create-note' onSubmit={this.onSubmitHandler}>
+                    <input type="text" placeholder="Title" value={this.state.title} onChange={this.onTitleChangeHandler} maxLength={this.state.charLimit} />
+                    <input type="text" placeholder="Description" value={this.state.body} onChange={this.onBodyChangeHandler} />
+                    <button type="submit">Create</button>
+                </form>
+            </>
         )
     }
 }
