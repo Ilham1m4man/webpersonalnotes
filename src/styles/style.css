@@ -1,15 +1,186 @@
+:root {
+    --apr-color: #DEEEEA;
+    --bsd-color: #39A6A3;
+    --crd-color: #BF1363;
+    --dth-color: #231E23;
+}
+
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: 'Gudea', sans-serif;
 }
 
 body {
-    font-family: 'Inter', sans-serif;
-    background-color: #202124;
-    color: white;
+    background-color: var(--dth-color);
+    color: var(--apr-color);
 }
 
-.is-hidden {
-    display: none;
+header {
+    border-bottom: 2px solid var(--apr-color);
+    margin-bottom: 30px;
+}
+
+header > h2 {
+    font-weight: bold;
+    font-size: 2em;
+    padding: 5px 15px;
+}
+
+.search-note {
+    padding: 20px;
+}
+
+.search-note > input {
+    color: var(--apr-color);
+    background-color: transparent;
+    border: 1px solid var(--apr-color);
+    width: 100%;
+    font-size: 1.25em;
+    border-radius: 20px;
+    padding: 5px 10px;
+    transition: all 0.25s ease-in-out;
+}
+
+.search-note > input:hover,
+.search-note > input:focus {
+    outline: 0;
+    border: 1px solid transparent;
+    border-bottom: 1px solid var(--apr-color);
+    border-radius: 0;
+    box-shadow: 0px 10px 12px -10px rgba(57,166,163,1);
+}
+
+.create-note > input {
+    width: 100%;
+    background-color: transparent;
+    color: var(--apr-color);
+    border-radius: 20px;
+    padding: 5px 15px;
+    border: 1px solid var(--apr-color);
+}
+
+.create-note > textarea {
+    width: 100%;
+    height: 180px;
+    background-color: transparent;
+    color: var(--apr-color);
+    border-radius: 20px;
+    padding: 10px 15px;
+    border: 1px solid var(--apr-color);
+}
+
+.create-note > button {
+    background-color: transparent;
+    border: 1px solid var(--apr-color);
+    color: var(--apr-color);
+    width: 100%;
+    border-radius: 10px;
+    padding: 3px;
+    transition: all 0.1s ease-in-out;
+}
+
+.create-note > button:hover {
+    border: 1px solid transparent;
+    color: var(--dth-color);
+    background-color: var(--apr-color);
+    font-weight: bold;
+    transform: translateY(-10%);
+    box-shadow: 0px 10px 10px -8px rgba(57,166,163,1);
+}
+
+.create-note > button:active {
+    border: 1px solid var(--apr-color);
+    color: var(--apr-color);
+    background-color: var(--bsd-color);
+    font-weight: bold;
+    transform: translateY(0%);
+    box-shadow: none;
+}
+
+.red {
+    color: var(--crd-color);
+}
+
+.char-counter {
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.your-note {
+    margin-left: 60px;
+    margin-right: 60px;
+    border-bottom: 2px solid var(--apr-color);
+    padding-bottom: 10px;
+}
+.no-note {
+    margin-left: 60px;
+    margin-right: 60px;
+}
+
+.note-list {
+    width: 100%;
+    margin: 10px auto;
+}
+
+.card {
+    width: 300px;
+    height: 350px;
+    padding: 0;
+    margin: 10px 20px;
+    border-radius: 15px;
+}
+
+.note-item {
+    background-color: transparent;
+    border: 1px solid var(--apr-color);
+}
+
+.note-item-createdAt {
+    filter: brightness(60%);
+    border: 2px solid var(--apr-color);
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    padding: 5px 0;
+}
+
+.note-item-buttons {
+    border: 1px solid var(--apr-color);
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+}
+
+.note-item-delete {
+    background-color: transparent;
+    color: var(--crd-color);
+    width: 100%;
+    border: none;
+    transition: all 0.1s ease-in-out;
+    padding: 10px;
+}
+
+.note-item-delete:hover {
+    background-color: var(--crd-color);
+    color: var(--apr-color);
+    border-radius: 0 0 0 15px;
+    font-weight: bold;
+}
+
+.note-item-archive {
+    background-color: transparent;
+    color: var(--bsd-color);
+    width: 100%;
+    border: none;
+    transition: all 0.1s ease-in-out;
+    padding: 10px;
+}
+
+.note-item-archive:hover {
+    background-color: var(--bsd-color);
+    color: var(--apr-color);
+    border-radius: 0 0 15px 0;
+    font-weight: bold;
 }
