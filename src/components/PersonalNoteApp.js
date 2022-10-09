@@ -10,8 +10,8 @@ class PersonalNoteApp extends React.Component {
 
         this.state = {
             note: getInitialData(),
-            createdAt: showFormattedDate(props),
-            archivedNote: getArchivedData()
+            archivedNote: getArchivedData(),
+            titleSearch: '',
         }
 
         this.onDeleteHandler = this.onDeleteHandler.bind(this);
@@ -21,6 +21,7 @@ class PersonalNoteApp extends React.Component {
         this.onAddNewNoteHandler = this.onAddNewNoteHandler.bind(this);
         this.onAddNoteHandler = this.onAddNoteHandler.bind(this);
         this.onAddArchivedNoteHandler = this.onAddArchivedNoteHandler.bind(this);
+        this.onTitleSearchChangeHandler = this.onTitleSearchChangeHandler.bind(this);
     }
 
     onDeleteHandler(id) {
@@ -38,7 +39,7 @@ class PersonalNoteApp extends React.Component {
             return {
                 archivedNote: [
                     ...prevState.archivedNote,
-                        addArchivedNote
+                    addArchivedNote
                 ]
             }
         });
@@ -50,7 +51,7 @@ class PersonalNoteApp extends React.Component {
             return {
                 note: [
                     ...prevState.note,
-                        addNote
+                    addNote
                 ]
             }
         });
@@ -61,7 +62,7 @@ class PersonalNoteApp extends React.Component {
         let archived = this.state.note.map((note) => {
             if (note.id === id) {
                 note.archived = !note.archived;
-                this.onAddArchivedNoteHandler(note); 
+                this.onAddArchivedNoteHandler(note);
             }
             return note;
         });
@@ -72,7 +73,7 @@ class PersonalNoteApp extends React.Component {
         let archived = this.state.archivedNote.map((note) => {
             if (note.id === id) {
                 note.archived = !note.archived;
-                this.onAddNoteHandler(note); 
+                this.onAddNoteHandler(note);
             }
             return note;
         });
@@ -95,7 +96,15 @@ class PersonalNoteApp extends React.Component {
             }
         });
     }
-    
+
+    onTitleSearchChangeHandler(event) {
+        this.setState(() => {
+            return {
+                titleSearch: event.target.value,
+            }
+        });
+    }
+
 
     render() {
         let noteElm;
@@ -104,23 +113,35 @@ class PersonalNoteApp extends React.Component {
         if (this.state.note.length === 0) {
             noteElm = <p className="no-note">There is no note</p>;
         } else {
-            noteElm = <NoteList note={this.state.note} onDelete={this.onDeleteHandler} onArchive={this.onArchiveHandler} />;
+            noteElm = <NoteList searchNote={this.state.titleSearch} note={this.state.note} onDelete={this.onDeleteHandler} onArchive={this.onArchiveHandler} />;
         }
 
-        if(this.state.archivedNote.length === 0) {
-            archivedNoteElm = <p className="no-archived-note">There is no archived note</p>;
+        if (this.state.archivedNote.length === 0) {
+            archivedNoteElm = <p className="no-note">There is no archived note</p>;
         } else {
-            archivedNoteElm = <ArchivedNoteList archivedNote={this.state.archivedNote} onArchivedDelete={this.onArchivedDeleteHandler} onUnarchive={this.onUnarchiveHandler} />;
+            archivedNoteElm = <ArchivedNoteList searchNote={this.state.titleSearch} archivedNote={this.state.archivedNote} onArchivedDelete={this.onArchivedDeleteHandler} onUnarchive={this.onUnarchiveHandler} />;
         }
 
         return (
             <div className="personal-note-app">
-                <h2>Create New Note</h2>
-                <NoteInput addNewNote={this.onAddNewNoteHandler} />
-                <h2>Your Note</h2>
-                {noteElm}
-                <h2>Archived</h2>
-                {archivedNoteElm}
+                <header>
+                    <h2>Personal Note App</h2>
+                </header>
+                <form className='search-note d-flex justify-content-center'>
+                    <input className="w-25" type="text" placeholder="Search note's title" value={this.state.titleSearch} onChange={this.onTitleSearchChangeHandler} />
+                </form>
+                <div className="container w-50 pb-5 pt-5">
+                    <h2>Create New Note</h2>
+                    <NoteInput addNewNote={this.onAddNewNoteHandler} />
+                </div>
+                <div className="container w-75 pb-5 pt-5">
+                    <h2 className="your-note">Your Note</h2>
+                    {noteElm}
+                </div>
+                <div className="container w-75 pb-5 pt-5">
+                    <h2 className="your-note">Archived</h2>
+                    {archivedNoteElm}
+                </div>
             </div>
         )
     }
